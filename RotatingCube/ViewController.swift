@@ -10,14 +10,31 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var changeColorButton : UIButton?
+    @IBOutlet weak var mapButton : UIButton?
+    
+    let cubeVC : CubeViewController = CubeViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        drawCubeVC()
+        
+        self.view.bringSubviewToFront(changeColorButton!)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func drawCubeVC()
+    {
+        self.addChildViewController(cubeVC)
+        self.view.addSubview(cubeVC.view)
+        self.cubeVC.didMoveToParentViewController(self)
+    }
+    
+    @IBAction func payButtonAction() {
+        self.cubeVC.payActionSuccess()
     }
 
 

@@ -1,0 +1,272 @@
+//
+//  CubeViewController.m
+//  RotatingCube
+//
+//  Created by Ivan Sinitsa on 6/9/15.
+//  Copyright © 2015 Ivan Sinitsa. All rights reserved.
+//
+
+#import "CubeViewController.h"
+#import <OpenGLES/ES2/glext.h>
+
+typedef struct {
+    float Position[3];
+    float Color[4];
+    float TexCoord[2];
+} Vertex;
+
+const Vertex Vertices[] = {
+    // Front
+    {{1, -1, 1}, {1, 1, 1, 1}, {1, 0}},
+    {{1, 1, 1}, {1, 1, 1, 1}, {1, 1}},
+    {{-1, 1, 1}, {1, 1, 1, 1}, {0, 1}},
+    {{-1, -1, 1}, {1, 1, 1, 1}, {0, 0}},
+    // Back
+    {{1, 1, -1}, {1, 1, 1, 1}, {0, 1}},
+    {{-1, -1, -1}, {1, 1, 1, 1}, {1, 0}},
+    {{1, -1, -1}, {1, 1, 1, 1}, {0, 0}},
+    {{-1, 1, -1}, {1, 1, 1, 1}, {1, 1}},
+    // Left
+    {{-1, -1, 1}, {1, 1, 1, 1}, {1, 0}},
+    {{-1, 1, 1}, {1, 1, 1, 1}, {1, 1}},
+    {{-1, 1, -1}, {1, 1, 1, 1}, {0, 1}},
+    {{-1, -1, -1}, {1, 1, 1, 1}, {0, 0}},
+    // Right
+    {{1, -1, -1}, {1, 1, 1, 1}, {1, 0}},
+    {{1, 1, -1}, {1, 1, 1, 1}, {1, 1}},
+    {{1, 1, 1}, {1, 1, 1, 1}, {0, 1}},
+    {{1, -1, 1}, {1, 1, 1, 1}, {0, 0}},
+    // Top
+    {{1, 1, 1}, {1, 1, 1, 1}, {1, 0}},
+    {{1, 1, -1}, {1, 1, 1, 1}, {1, 1}},
+    {{-1, 1, -1}, {1, 1, 1, 1}, {0, 1}},
+    {{-1, 1, 1}, {1, 1, 1, 1}, {0, 0}},
+    // Bottom
+    {{1, -1, -1}, {1, 1, 1, 1}, {1, 0}},
+    {{1, -1, 1}, {1, 1, 1, 1}, {1, 1}},
+    {{-1, -1, 1}, {1, 1, 1, 1}, {0, 1}},
+    {{-1, -1, -1}, {1, 1, 1, 1}, {0, 0}}
+};
+
+const GLubyte Indices[] = {
+    // Front
+    0, 1, 2,
+    2, 3, 0,
+    // Back
+    4, 6, 5,
+    4, 5, 7,
+    // Left
+    8, 9, 10,
+    10, 11, 8,
+    // Right
+    12, 13, 14,
+    14, 15, 12,
+    // Top
+    16, 17, 18,
+    18, 19, 16,
+    // Bottom
+    20, 21, 22,
+    22, 23, 20
+};
+
+@interface CubeViewController () {
+    float _curRed;
+    BOOL _increasing;
+    GLuint _vertexBuffer;
+    GLuint _indexBuffer;
+    GLuint _vertexArray;
+    float _rotation;
+}
+@property (strong, nonatomic) EAGLContext *context;
+@property (strong, nonatomic) GLKBaseEffect *effect;
+
+@end
+
+@implementation CubeViewController
+@synthesize context = _context;
+@synthesize effect = _effect;
+// Rest of file...
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+/*
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView
+ {
+ }
+ */
+
+- (void)setupGL {
+    
+    [EAGLContext setCurrentContext:self.context];
+    glEnable(GL_CULL_FACE);
+    
+    self.effect = [[GLKBaseEffect alloc] init];
+    
+    NSDictionary * options = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithBool:YES],
+                              GLKTextureLoaderOriginBottomLeft,
+                              nil];
+    
+    NSError * error;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"t2p_original" ofType:@"png"];
+    GLKTextureInfo * info = [GLKTextureLoader textureWithContentsOfFile:path options:options error:&error];
+    if (info == nil) {
+        NSLog(@"Error loading file: %@", [error localizedDescription]);
+    }
+    self.effect.texture2d0.name = info.name;
+    self.effect.texture2d0.enabled = true;
+    self.effect.useConstantColor = true;
+    
+    // New lines
+    glGenVertexArraysOES(1, &_vertexArray);
+    glBindVertexArrayOES(_vertexArray);
+    
+    // Old stuff
+    glGenBuffers(1, &_vertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &_indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+    
+    // New lines (were previously in draw)
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Position));
+    glEnableVertexAttribArray(GLKVertexAttribColor);
+    glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, Color));
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid *) offsetof(Vertex, TexCoord));
+    
+    // New line
+    glBindVertexArrayOES(0);
+    
+}
+
+- (void)tearDownGL {
+    
+    [EAGLContext setCurrentContext:self.context];
+    
+    glDeleteBuffers(1, &_vertexBuffer);
+    glDeleteBuffers(1, &_indexBuffer);
+    //glDeleteVertexArraysOES(1, &_vertexArray);
+    
+    self.effect = nil;
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    
+    if (!self.context) {
+        NSLog(@"Failed to create ES context");
+    }
+    
+    //    GLKView *view = (GLKView *)self.view;
+    //    view.context = self.context;
+    
+    
+    GLKView *view = (GLKView *)self.view;
+    view.context = self.context;
+    view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    view.drawableMultisample = GLKViewDrawableMultisample4X;
+    
+    [self setupGL];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    [self tearDownGL];
+    
+    if ([EAGLContext currentContext] == self.context) {
+        [EAGLContext setCurrentContext:nil];
+    }
+    self.context = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - GLKViewDelegate
+
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+    
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    [self.effect prepareToDraw];
+    
+    glBindVertexArrayOES(_vertexArray);
+    glDrawElements(GL_TRIANGLES, sizeof(Indices)/sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
+}
+
+#pragma mark - GLKViewControllerDelegate
+
+- (void)update {
+    float aspect = fabs(self.view.bounds.size.width /
+                        self.view.bounds.size.height);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective
+    (GLKMathDegreesToRadians(50.0f), aspect, 0.1f, 100.0f);
+    self.effect.transform.projectionMatrix = projectionMatrix;
+    
+    GLKMatrix4 modelMatrix =
+    GLKMatrix4MakeTranslation(0.0f,0.0f,-7.0f);
+    modelMatrix =
+    GLKMatrix4Rotate(modelMatrix,_rotation,1.0f,1.0f,0.7f);
+    self.effect.transform.modelviewMatrix = modelMatrix;
+    
+    _rotation += self.timeSinceLastUpdate * 2.0f;
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self payActionSuccess];
+}
+
+- (void)payActionSuccess
+{
+    NSError * error;
+    NSDictionary * options = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithBool:YES],
+                              GLKTextureLoaderOriginBottomLeft,
+                              nil];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"t2p_green" ofType:@"png"];
+    GLKTextureInfo * info = [GLKTextureLoader textureWithContentsOfFile:path options:options error:&error];
+    if (info == nil) {
+        NSLog(@"Error loading file: %@", [error localizedDescription]);
+    }
+    self.effect.texture2d0.name = info.name;
+}
+
+
+
+
+
+
+@end

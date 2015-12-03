@@ -14,6 +14,17 @@
 		2C3B64C91B27046800F6FE78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C3B64C71B27046800F6FE78 /* LaunchScreen.storyboard */; };
 		2C3B64D41B27046800F6FE78 /* RotatingCubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B64D31B27046800F6FE78 /* RotatingCubeTests.swift */; };
 		2C3B64DF1B27046800F6FE78 /* RotatingCubeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B64DE1B27046800F6FE78 /* RotatingCubeUITests.swift */; };
+		2C3B64EF1B27068000F6FE78 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B64EE1B27068000F6FE78 /* OpenGLES.framework */; };
+		2C3B64F11B27068500F6FE78 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B64F01B27068500F6FE78 /* GLKit.framework */; };
+		2C3B64F51B27077500F6FE78 /* CubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B64F41B27077500F6FE78 /* CubeViewController.m */; };
+		2C3B65011B2720B300F6FE78 /* t2p_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3B64FE1B2720B300F6FE78 /* t2p_green.png */; };
+		2C3B65021B2720B300F6FE78 /* t2p_original.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3B64FF1B2720B300F6FE78 /* t2p_original.png */; };
+		2C3B65031B2720B300F6FE78 /* t2p_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3B65001B2720B300F6FE78 /* t2p_red.png */; };
+		2C3B65051B2720DD00F6FE78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B65041B2720DD00F6FE78 /* CoreGraphics.framework */; };
+		2C3B65071B2720E600F6FE78 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B65061B2720E600F6FE78 /* QuartzCore.framework */; };
+		2C3B65091B2720F800F6FE78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B65081B2720F800F6FE78 /* UIKit.framework */; };
+		2C3B650B1B2720FD00F6FE78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B650A1B2720FD00F6FE78 /* Foundation.framework */; };
+		2C3B650F1B29729E00F6FE78 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3B650E1B29729E00F6FE78 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +58,19 @@
 		2C3B64DA1B27046800F6FE78 /* RotatingCubeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RotatingCubeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3B64DE1B27046800F6FE78 /* RotatingCubeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingCubeUITests.swift; sourceTree = "<group>"; };
 		2C3B64E01B27046800F6FE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C3B64EE1B27068000F6FE78 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		2C3B64F01B27068500F6FE78 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		2C3B64F21B27077400F6FE78 /* RotatingCube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RotatingCube-Bridging-Header.h"; sourceTree = "<group>"; };
+		2C3B64F31B27077500F6FE78 /* CubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeViewController.h; sourceTree = "<group>"; };
+		2C3B64F41B27077500F6FE78 /* CubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeViewController.m; sourceTree = "<group>"; };
+		2C3B64FE1B2720B300F6FE78 /* t2p_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = t2p_green.png; path = RotatingCube/t2p_green.png; sourceTree = "<group>"; };
+		2C3B64FF1B2720B300F6FE78 /* t2p_original.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = t2p_original.png; path = RotatingCube/t2p_original.png; sourceTree = "<group>"; };
+		2C3B65001B2720B300F6FE78 /* t2p_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = t2p_red.png; path = RotatingCube/t2p_red.png; sourceTree = "<group>"; };
+		2C3B65041B2720DD00F6FE78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C3B65061B2720E600F6FE78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2C3B65081B2720F800F6FE78 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2C3B650A1B2720FD00F6FE78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2C3B650E1B29729E00F6FE78 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +78,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3B650F1B29729E00F6FE78 /* MapKit.framework in Frameworks */,
+				2C3B650B1B2720FD00F6FE78 /* Foundation.framework in Frameworks */,
+				2C3B65091B2720F800F6FE78 /* UIKit.framework in Frameworks */,
+				2C3B65071B2720E600F6FE78 /* QuartzCore.framework in Frameworks */,
+				2C3B65051B2720DD00F6FE78 /* CoreGraphics.framework in Frameworks */,
+				2C3B64F11B27068500F6FE78 /* GLKit.framework in Frameworks */,
+				2C3B64EF1B27068000F6FE78 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +108,10 @@
 		2C3B64B21B27046800F6FE78 = {
 			isa = PBXGroup;
 			children = (
+				2CAD6DD11C106A0F0084F91B /* Frameworks */,
+				2C3B64FE1B2720B300F6FE78 /* t2p_green.png */,
+				2C3B64FF1B2720B300F6FE78 /* t2p_original.png */,
+				2C3B65001B2720B300F6FE78 /* t2p_red.png */,
 				2C3B64BD1B27046800F6FE78 /* RotatingCube */,
 				2C3B64D21B27046800F6FE78 /* RotatingCubeTests */,
 				2C3B64DD1B27046800F6FE78 /* RotatingCubeUITests */,
@@ -103,6 +138,9 @@
 				2C3B64C51B27046800F6FE78 /* Assets.xcassets */,
 				2C3B64C71B27046800F6FE78 /* LaunchScreen.storyboard */,
 				2C3B64CA1B27046800F6FE78 /* Info.plist */,
+				2C3B64F31B27077500F6FE78 /* CubeViewController.h */,
+				2C3B64F41B27077500F6FE78 /* CubeViewController.m */,
+				2C3B64F21B27077400F6FE78 /* RotatingCube-Bridging-Header.h */,
 			);
 			path = RotatingCube;
 			sourceTree = "<group>";
@@ -123,6 +161,20 @@
 				2C3B64E01B27046800F6FE78 /* Info.plist */,
 			);
 			path = RotatingCubeUITests;
+			sourceTree = "<group>";
+		};
+		2CAD6DD11C106A0F0084F91B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C3B650E1B29729E00F6FE78 /* MapKit.framework */,
+				2C3B650A1B2720FD00F6FE78 /* Foundation.framework */,
+				2C3B65081B2720F800F6FE78 /* UIKit.framework */,
+				2C3B64EE1B27068000F6FE78 /* OpenGLES.framework */,
+				2C3B64F01B27068500F6FE78 /* GLKit.framework */,
+				2C3B65061B2720E600F6FE78 /* QuartzCore.framework */,
+				2C3B65041B2720DD00F6FE78 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +239,7 @@
 		2C3B64B31B27046800F6FE78 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Ivan Sinitsa";
 				TargetAttributes = {
@@ -229,7 +282,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3B64C91B27046800F6FE78 /* LaunchScreen.storyboard in Resources */,
+				2C3B65021B2720B300F6FE78 /* t2p_original.png in Resources */,
 				2C3B64C61B27046800F6FE78 /* Assets.xcassets in Resources */,
+				2C3B65011B2720B300F6FE78 /* t2p_green.png in Resources */,
+				2C3B65031B2720B300F6FE78 /* t2p_red.png in Resources */,
 				2C3B64C41B27046800F6FE78 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3B64C11B27046800F6FE78 /* ViewController.swift in Sources */,
+				2C3B64F51B27077500F6FE78 /* CubeViewController.m in Sources */,
 				2C3B64BF1B27046800F6FE78 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,10 +455,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = RotatingCube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.home.RotatingCube;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project.RotatingCube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RotatingCube/RotatingCube-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -409,10 +469,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = RotatingCube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.home.RotatingCube;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project.RotatingCube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RotatingCube/RotatingCube-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -483,6 +545,7 @@
 				2C3B64E51B27046800F6FE78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C3B64E61B27046800F6FE78 /* Build configuration list for PBXNativeTarget "RotatingCubeTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +554,7 @@
 				2C3B64E81B27046800F6FE78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C3B64E91B27046800F6FE78 /* Build configuration list for PBXNativeTarget "RotatingCubeUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +563,7 @@
 				2C3B64EB1B27046800F6FE78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
